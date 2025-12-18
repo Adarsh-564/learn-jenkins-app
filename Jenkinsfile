@@ -2,6 +2,12 @@ pipeline {
     agent any
 
     stages {
+
+        stage('Docker Build') {
+            steps {
+                sh 'docker build -t my-playwright .'
+            }
+        }
         
         stage('Build') {
             agent {
@@ -93,7 +99,7 @@ pipeline {
             }
             steps {
                 sh '''
-                npm install netlify-cli 
+                npm install netlify-cli@20.1.1
                 node_modules/.bin/netlify --version
                 '''
             }
